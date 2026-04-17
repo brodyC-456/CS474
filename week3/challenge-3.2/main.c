@@ -122,7 +122,7 @@ int main(void)
         printf("%d\n", nums[i]);
     }
     printf("%s\n", s);
-    
+
     // Challenge 6:
     //
     // Make an array of interleaved `struct bicycle` and `int` data
@@ -135,6 +135,28 @@ int main(void)
     // Store as many of these as can fit in SIZE bytes. Loop through,
     // filling them up with programmatically-generated data. Then loop
     // through again and print out the elements.
+
+    struct bicycle *bi;
+    int *val;
+
+    int pair_size = sizeof(struct bicycle) + sizeof(int);
+    int count = SIZE / pair_size;
+
+    for (int i = 0; i < count; i++){
+        bi = (struct bicycle *)((char *)heap + i * pair_size);
+        val = (int *)((char *)bi + sizeof(struct bicycle));
+
+        bi->wheel_count = 2;
+        sprintf(bi->name, "bike %d", i);
+        *val = i;
+    }
+
+    for(int i = 0; i < count; i++){
+        bi = (struct bicycle *)((char *)heap + i * pair_size);
+        val = (int *)((char *)bi + sizeof(struct bicycle));
+
+        printf("%s (%d wheels), %d\n", bi->name, bi->wheel_count, *val);
+    }
 
 
 
