@@ -1,0 +1,5 @@
+testfs
+
+*.o
+*.a
+*.txt
